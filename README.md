@@ -1,6 +1,7 @@
-# GPT Templates
+English | [繁體中文](https://github.com/cycleapple/GPT_Template_Manager/blob/main/README_zh.md)
+# GPT Template Manager
 
-GPT Templates is a web application for creating and managing templates for generating text using GPT models. It allows users to create templates with prompts and prompt descriptions, and categorize them by topic. The templates can be edited, deleted, and copied to the clipboard for use in generating text. Additionally, any text within square brackets will be highlighted in blue.
+GPT Template Manager is a web application for creating and managing templates for generating text using GPT models. It allows users to create templates with prompts and prompt descriptions, and categorize them by topic. The templates can be edited, deleted, and copied to the clipboard for use in generating text. Additionally, any text within square brackets will be highlighted in blue.
 
 ## Getting Started
 

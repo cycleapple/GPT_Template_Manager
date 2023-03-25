@@ -1,3 +1,4 @@
+[English](https://github.com/cycleapple/GPT_Template_Manager) | 繁體中文
 # GPT 指令管理器
 
 GPT 指令管理器是一個用來創建和管理使用 GPT 模型產生文本的模板的網頁應用程式。使用者可以建立具有提示和提示描述的模板，並根據主題進行分類。模板可以進行編輯、刪除，並可以複製到剪貼板以用於生成文本。
