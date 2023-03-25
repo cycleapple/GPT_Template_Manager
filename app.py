@@ -14,11 +14,9 @@ class Block(db.Model):
     title = db.Column(db.String(100), nullable=False)
     prompt = db.Column(db.String(2000), nullable=False)
     prompt_description = db.Column(db.String(200), nullable=False)
-    category = db.Column(db.String(50), nullable=False)
 
     def __repr__(self):
         return '<Block %r>' % self.title
-
 
 # create the tables in the database
 with app.app_context():
