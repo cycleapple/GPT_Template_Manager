@@ -31,4 +31,22 @@
   textarea {
     resize: none;
   }
+
+  .highlight {
+    background-color: #f6f8fa;
+    border-radius: 4px;
+    padding: 16px;
+  }
+  
+  pre.highlight {
+    margin: 0;
+    padding: 0;
+}
+  
+  .highlight pre code {
+    font-family: "SF Mono", "Segoe UI Mono", "Roboto Mono", Menlo, Courier, monospace;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  
   

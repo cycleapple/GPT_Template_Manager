@@ -1,0 +1,22 @@
+# Ignore Python byte code and log files
+*.pyc
+*.pyo
+*.log
+
+# Ignore database files
+instance/*.db
+
+# Ignore IDE-specific files and directories
+.idea/
+.vscode/
+
+# Ignore compiled and minified assets
+/static/css/*.min.css
+/static/js/*.min.js
+
+# Ignore local development files and directories
+venv/
+__pycache__/
+config.py
+
+# Ignore any other files or directories that you don't want to include in version control

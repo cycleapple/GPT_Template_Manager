@@ -3,25 +3,41 @@
 {% block content %}
   <div class="row my-2">
     <div class="col">
-      <h1>Blocks</h1>
+      <h1>GPT Templates</h1>
     </div>
     <div class="col text-end">
-      <a href="{{ url_for('create') }}" class="btn btn-primary">Create Block</a>
+      <a href="{{ url_for('create') }}" class="btn btn-primary">Create Template</a>
     </div>
   </div>
   {% for block in blocks %}
     <div class="card my-2">
-      <div class="card-body">
-        <h5 class="card-title">{{ block.title }}</h5>
-        <p class="card-text">{{ block.prompt_description }}</p>
-        <div class="input-group">
-          <input type="text" class="form-control" id="prompt{{ block.id }}" value="{{ block.prompt }}" readonly>
-          <button class="btn btn-outline-secondary" type="button" onclick="copyPrompt('prompt{{ block.id }}')">Copy</button>
+      <div class="card-body" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.5em;">
+        <div class="row mb-3">
+          <div class="col-10">
+            <h2 class="card-title">{{ block.title }}</h2>
+          </div>
+          <div class="col-2 text-end">
+            <button class="btn btn-outline-secondary" type="button" onclick="copyPrompt('{{ block.prompt }}')">Copy</button>
+          </div>
         </div>
-        <a href="{{ url_for('edit', id=block.id) }}" class="btn btn-primary my-2">Edit</a>
-        <form action="{{ url_for('delete', id=block.id) }}" method="post" class="d-inline">
-          <button type="submit" class="btn btn-danger my-2">Delete</button>
-        </form>
+        <div class="row mb-3">
+          <div class="col-12">
+            <p class="card-text h4" style="line-height: 1.5em;">{{ block.prompt|highlight_brackets }}</p>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-12">
+            <p class="card-text" style="line-height: 1.5em;">{{ block.prompt_description }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <a href="{{ url_for('edit', id=block.id) }}" class="btn btn-primary">Edit</a>
+            <form action="{{ url_for('delete', id=block.id) }}" method="post" class="d-inline">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   {% endfor %}
@@ -29,11 +45,17 @@
 
 {% block scripts %}
   <script>
-    function copyPrompt(promptId) {
-      var promptElement = document.getElementById(promptId);
-      promptElement.select();
-      promptElement.setSelectionRange(0, 99999);
-      document.execCommand("copy");
+    function copyPrompt(prompt) {
+      var textarea = document.createElement('textarea');
+      textarea.value = prompt;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'absolute';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      alert('Prompt copied to clipboard!');
     }
   </script>
 {% endblock %}
