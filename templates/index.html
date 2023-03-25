@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row my-2">
+    <div class="col">
+      <h1>Blocks</h1>
+    </div>
+    <div class="col text-end">
+      <a href="{{ url_for('create') }}" class="btn btn-primary">Create Block</a>
+    </div>
+  </div>
+  {% for block in blocks %}
+    <div class="card my-2">
+      <div class="card-body">
+        <h5 class="card-title">{{ block.title }}</h5>
+        <p class="card-text">{{ block.prompt_description }}</p>
+        <div class="input-group">
+          <input type="text" class="form-control" id="prompt{{ block.id }}" value="{{ block.prompt }}" readonly>
+          <button class="btn btn-outline-secondary" type="button" onclick="copyPrompt('prompt{{ block.id }}')">Copy</button>
+        </div>
+        <a href="{{ url_for('edit', id=block.id) }}" class="btn btn-primary my-2">Edit</a>
+        <form action="{{ url_for('delete', id=block.id) }}" method="post" class="d-inline">
+          <button type="submit" class="btn btn-danger my-2">Delete</button>
+        </form>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    function copyPrompt(promptId) {
+      var promptElement = document.getElementById(promptId);
+      promptElement.select();
+      promptElement.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+    }
+  </script>
+{% endblock %}

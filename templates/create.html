@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row my-2">
+    <div class="col">
+      <h1>Create Block</h1>
+    </div>
+    <div class="col text-end">
+      <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+  </div>
+  <form action="{{ url_for('create') }}" method="post">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" name="title" required>
+    </div>
+    <div class="mb-3">
+      <label for="prompt" class="form-label">Prompt</label>
+      <textarea class="form-control" id="prompt" name="prompt" rows="3" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="prompt_description" class="form-label">Prompt Description</label>
+      <textarea class="form-control" id="prompt_description" name="prompt_description" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Block</button>
+  </form>
+{% endblock %}
