@@ -22,6 +22,10 @@
       <label for="prompt_description" class="form-label">Prompt Description</label>
       <textarea class="form-control" id="prompt_description" name="prompt_description" rows="3" required>{{ block.prompt_description }}</textarea>
     </div>
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <input type="text" class="form-control" id="category" name="category" value="{{ block.category }}" required>
+    </div>
     <button type="submit" class="btn btn-primary">Update Block</button>
   </form>
 {% endblock %}

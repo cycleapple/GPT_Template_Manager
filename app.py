@@ -14,6 +14,7 @@ class Block(db.Model):
     title = db.Column(db.String(100), nullable=False)
     prompt = db.Column(db.String(2000), nullable=False)
     prompt_description = db.Column(db.String(200), nullable=False)
+    category = db.Column(db.String(50), nullable=True)
 
     def __repr__(self):
         return '<Block %r>' % self.title
@@ -38,8 +39,15 @@ def highlight_brackets(text):
 
 @app.route('/')
 def index():
-    blocks = Block.query.all()
-    return render_template('index.html', blocks=blocks)
+    category = request.args.get('category', '')
+    if category:
+        blocks = Block.query.filter_by(category=category).all()
+    else:
+        blocks = Block.query.all()
+    categories = set([b.category for b in Block.query.all()])
+    categories_count = {c: len(Block.query.filter_by(category=c).all()) for c in categories}
+    return render_template('index.html', blocks=blocks, categories=categories, current_category=category, categories_count=categories_count)
+
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
@@ -47,7 +55,8 @@ def create():
         title = request.form['title']
         prompt = request.form['prompt']
         prompt_description = request.form['prompt_description']
-        block = Block(title=title, prompt=prompt, prompt_description=prompt_description)
+        category = request.form['category']
+        block = Block(title=title, prompt=prompt, prompt_description=prompt_description, category=category)
         db.session.add(block)
         db.session.commit()
         return redirect(url_for('index'))
@@ -60,6 +69,7 @@ def edit(id):
         block.title = request.form['title']
         block.prompt = request.form['prompt']
         block.prompt_description = request.form['prompt_description']
+        block.category = request.form['category']
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('edit.html', block=block)
